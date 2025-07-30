@@ -1,25 +1,6 @@
-/*
- * Pixel Dungeon
- * Copyright (C) 2012-2015 Oleg Dolya
- *
- * Shattered Pixel Dungeon
- * Copyright (C) 2014-2025 Evan Debenham
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>
- */
 
-package com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic;
+
+		package com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic;
 
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Belongings;
@@ -44,7 +25,7 @@ import com.shatteredpixel.shatteredpixeldungeon.windows.WndTitledMessage;
 import com.watabou.noosa.audio.Sample;
 
 public class ScrollOfEnchantment extends ExoticScroll {
-	
+
 	{
 		icon = ItemSpriteSheet.Icons.SCROLL_ENCHANT;
 
@@ -54,7 +35,7 @@ public class ScrollOfEnchantment extends ExoticScroll {
 	}
 
 	protected static boolean identifiedByUse = false;
-	
+
 	@Override
 	public void doRead() {
 		if (!isKnown()) {
@@ -92,7 +73,7 @@ public class ScrollOfEnchantment extends ExoticScroll {
 			public void onBackPressed() {}
 		} );
 	}
-	
+
 	protected WndBag.ItemSelector itemSelector = new WndBag.ItemSelector() {
 
 		@Override
@@ -112,35 +93,35 @@ public class ScrollOfEnchantment extends ExoticScroll {
 
 		@Override
 		public void onSelect(final Item item) {
-			
+
 			if (item instanceof Weapon){
 				if (!identifiedByUse) {
 					curItem.detach(curUser.belongings.backpack);
 				}
 				identifiedByUse = false;
-				
+
 				final Weapon.Enchantment enchants[] = new Weapon.Enchantment[3];
-				
+
 				Class<? extends Weapon.Enchantment> existing = ((Weapon) item).enchantment != null ? ((Weapon) item).enchantment.getClass() : null;
-				enchants[0] = Weapon.Enchantment.randomCommon( existing );
-				enchants[1] = Weapon.Enchantment.randomUncommon( existing );
-				enchants[2] = Weapon.Enchantment.randomRare( existing);
+				enchants[0] = Weapon.Enchantment.randomRare(existing);
+				enchants[1] = Weapon.Enchantment.randomRare(existing, enchants[0].getClass());
+				enchants[2] = Weapon.Enchantment.randomRare(existing, enchants[0].getClass(), enchants[1].getClass());
 
 				GameScene.show(new WndEnchantSelect((Weapon) item, enchants[0], enchants[1], enchants[2]));
-			
+
 			} else if (item instanceof Armor) {
 				if (!identifiedByUse) {
 					curItem.detach(curUser.belongings.backpack);
 				}
 				identifiedByUse = false;
-				
+
 				final Armor.Glyph glyphs[] = new Armor.Glyph[3];
-				
+
 				Class<? extends Armor.Glyph> existing = ((Armor) item).glyph != null ? ((Armor) item).glyph.getClass() : null;
 				glyphs[0] = Armor.Glyph.randomCommon( existing );
 				glyphs[1] = Armor.Glyph.randomUncommon( existing );
 				glyphs[2] = Armor.Glyph.random( existing, glyphs[0].getClass(), glyphs[1].getClass());
-				
+
 				GameScene.show(new WndGlyphSelect((Armor) item, glyphs[0], glyphs[1], glyphs[2]));
 			} else if (identifiedByUse){
 				((ScrollOfEnchantment)curItem).confirmCancelation();
@@ -159,7 +140,7 @@ public class ScrollOfEnchantment extends ExoticScroll {
 		}
 
 		public WndEnchantSelect(Weapon wep, Weapon.Enchantment ench1,
-		                           Weapon.Enchantment ench2, Weapon.Enchantment ench3){
+								Weapon.Enchantment ench2, Weapon.Enchantment ench3){
 			super(new ItemSprite(new ScrollOfEnchantment()),
 					Messages.titleCase(new ScrollOfEnchantment().name()),
 					Messages.get(ScrollOfEnchantment.class, "weapon"),
@@ -221,7 +202,7 @@ public class ScrollOfEnchantment extends ExoticScroll {
 		}
 
 		public WndGlyphSelect(Armor arm, Armor.Glyph glyph1,
-		                      Armor.Glyph glyph2, Armor.Glyph glyph3) {
+							  Armor.Glyph glyph2, Armor.Glyph glyph3) {
 			super(new ItemSprite(new ScrollOfEnchantment()),
 					Messages.titleCase(new ScrollOfEnchantment().name()),
 					Messages.get(ScrollOfEnchantment.class, "armor"),
