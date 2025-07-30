@@ -128,6 +128,8 @@ public class ScrollOfUpgrade extends InventoryScroll {
 
 		} else {
 			item = item.upgrade();
+			item = item.upgrade();
+			item = item.upgrade();
 		}
 
 		Badges.validateItemLevelAquired( item );
