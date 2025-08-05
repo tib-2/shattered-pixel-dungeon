@@ -85,6 +85,9 @@ public class ScrollOfUpgrade extends InventoryScroll {
 			boolean hadGoodEnchant = w.hasGoodEnchant();
 
 			item = w.upgrade();
+			item = w.upgrade();
+			item = w.upgrade();
+
 
 			if (w.cursedKnown && hadCursedEnchant && !w.hasCurseEnchant()){
 				removeCurse( Dungeon.hero );
@@ -105,6 +108,8 @@ public class ScrollOfUpgrade extends InventoryScroll {
 			boolean hadGoodGlyph = a.hasGoodGlyph();
 
 			item = a.upgrade();
+			item = a.upgrade();
+			item = a.upgrade();
 
 			if (a.cursedKnown && hadCursedGlyph && !a.hasCurseGlyph()){
 				removeCurse( Dungeon.hero );
@@ -121,6 +126,8 @@ public class ScrollOfUpgrade extends InventoryScroll {
 			boolean wasCursed = item.cursed;
 
 			item = item.upgrade();
+			item = item.upgrade();
+			item = item.upgrade();
 
 			if (item.cursedKnown && wasCursed && !item.cursed){
 				removeCurse( Dungeon.hero );
@@ -133,7 +140,7 @@ public class ScrollOfUpgrade extends InventoryScroll {
 		}
 
 		Badges.validateItemLevelAquired( item );
-		Statistics.upgradesUsed++;
+		Statistics.upgradesUsed += 3;
 		Badges.validateMageUnlock();
 
 		Catalog.countUse(item.getClass());
