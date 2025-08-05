@@ -49,6 +49,7 @@ public class ScrollOfUpgrade extends InventoryScroll {
 
 		unique = true;
 
+
 		talentFactor = 2f;
 	}
 
