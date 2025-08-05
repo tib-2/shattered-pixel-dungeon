@@ -58,7 +58,7 @@ public class RingOfArcana extends Ring {
 	}
 
 	public static float enchantPowerMultiplier(Char target ){
-		return (float)Math.pow(1.175f, getBuffedBonus(target, Arcana.class));
+		return (float)Math.pow(2.5f, getBuffedBonus(target, Arcana.class));
 	}
 
 	public class Arcana extends RingBuff {
